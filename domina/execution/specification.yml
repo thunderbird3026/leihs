@@ -67,9 +67,9 @@ contexts:
     startx:
       order: 3
       body: "substitute_with_path: domina/scripts/context_feature_startx.sh"
-#    setup_leihs:
-#      order: 4
-#      body: "substitute_with_path: domina/scripts/setup_leihs.sh"
+    setup_leihs:
+      order: 4
+      body: "substitute_with_path: domina/scripts/setup_leihs.sh"
     cucumber: 
       order: 5
       body: "substitute_with_path: domina/scripts/context_feature_cucumber.sh"
