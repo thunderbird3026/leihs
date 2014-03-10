@@ -206,7 +206,8 @@ class Item < ActiveRecord::Base
       'location',
       'invoice',
       'investment',
-      'project_number']
+      'project_number',
+      'anschaffungskategorie']
   end
 
   # Generates an array suitable for outputting a line of CSV using CSV
@@ -295,7 +296,8 @@ class Item < ActiveRecord::Base
       "#{self.location.to_s}",
       invoice,
       investment,
-      "#{self.properties[:project_number]}"
+      "#{self.properties[:project_number]}",
+      "#{self.properties[:anschaffungskategorie]}"
     ]
     
   end
