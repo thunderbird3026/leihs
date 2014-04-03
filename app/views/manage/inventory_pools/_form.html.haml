@@ -59,6 +59,14 @@
           .col1of2.text-align-center
             %input{type: "checkbox", name: "inventory_pool[print_contracts]", checked: @inventory_pool.print_contracts}
 
+        .row.padding-inset-s.emboss.margin-bottom-xxs
+          .col1of2
+            %strong.font-size-m= _("Automatic access")
+            %div.padding-top-xs
+              = _("New users will get customer access automatically.")
+          .col1of2.text-align-center
+            %input{type: "checkbox", name: "inventory_pool[automatic_access]", checked: @inventory_pool.automatic_access}
+
     .col1of2.padding-left-xs
 
       %h2.headline-m.padding-left-s= _("Workdays")
