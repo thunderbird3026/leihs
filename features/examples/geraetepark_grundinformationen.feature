@@ -70,5 +70,5 @@ Funktionalität: Gerätepark-Grundinformationen
     Wenn ich die aut. Zuweisung deaktiviere
     Und ich speichere
     Dann ist die aut. Zuweisung deaktiviert
-    Angenommen ich bin ein Benutzer, der sich zum ersten Mal einloggt
+    Angenommen man ist ein Benutzer, der sich zum ersten Mal einloggt
     Dann erhalte ich keinen aut. Zugriff für diesen Gerätepark

@@ -120,3 +120,25 @@ end
 Wenn(/^ich das gekennzeichnete "(.*?)" des Geräteparks leer lasse$/) do |field_name|
   first(".row.emboss", match: :prefer_exact, :text => field_name).first("input").set ""
 end
+
+Angenommen(/^ich editiere meinen Gerätepark$/) do
+  visit manage_edit_inventory_pool_path(@current_inventory_pool)
+end
+
+Wenn(/^ich die aut\. Zuweisung deaktiviere$/) do
+  within(".row.padding-inset-s", match: :prefer_exact, text: _("Automatic access")) do
+    first("input").set false
+  end
+end
+
+Dann(/^ist die aut\. Zuweisung deaktiviert$/) do
+  @current_inventory_pool.reload.automatic_access.should be_false
+end
+
+Angenommen(/^man ist ein Benutzer, der sich zum ersten Mal einloggt$/) do
+  @user = FactoryGirl.create :user
+end
+
+Dann(/^erhalte ich keinen aut\. Zugriff für diesen Gerätepark$/) do
+  @user.access_right_for(@current_inventory_pool).should be_nil
+end
