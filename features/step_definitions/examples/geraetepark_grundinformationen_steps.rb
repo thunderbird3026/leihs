@@ -12,6 +12,8 @@ Dann(/^kann ich die Gerätepark\-Grundinformationen eingeben$/) do |table|
     within(".row.padding-inset-s", match: :prefer_exact, text: field_name) do
       if field_name == "Verträge drucken"
         first("input").set false
+      elsif field_name == "Automatischer Zugriff"
+        first("input").set true
       else
         first("input,textarea").set (field_name == "E-Mail" ? "test@test.ch" : "test")
       end
@@ -29,6 +31,8 @@ Dann(/^sind die Informationen aktualisiert$/) do
     within(".row.padding-inset-s", match: :prefer_exact, text: field_name) do
       if field_name == "Verträge drucken"
         first("input").selected?.should be_false
+      elsif field_name == "Automatischer Zugriff"
+        first("input").selected?.should be_true
       else
         first("input,textarea").value.should == (field_name == "E-Mail" ? "test@test.ch" : "test")
       end

@@ -17,8 +17,8 @@ Funktionalität: Gerätepark-Grundinformationen
     | E-Mail |
     | Beschreibung |
     | Standard-Vertragsnotiz |
-    | Verträge drucken | 
-    | Aut. zuweisen  |     
+    | Verträge drucken |
+    | Automatischer Zugriff |
     Und ich kann die angegebenen Grundinformationen speichern
     Dann sehe eine Bestätigung
     Und sind die Informationen aktualisiert
