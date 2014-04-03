@@ -45,12 +45,12 @@ Funktionalität: Gerätepark-Grundinformationen
     Dann wird für meine Personendaten aus der Schnittstelle ein neuer Benutzer erstellt
     Und ich kriege bei allen Geräteparks mit aut. Zuweisung die Rolle 'Kunde'
 
-  @javascript
   Szenario: Aut. zuweisen beim Benutzererstellen ausserhalb des Geräteparks
     Angenommen Personas existieren
     Und es ist bei mehreren Geräteparks aut. Zuweisung aktiviert 
-    Angenommen ich bin Gino
-    Und ich erstelle einen neuen Benutzer
+    Und ich bin Gino
+    Und man befindet sich auf der Benutzerliste
+    Wenn ich einen Benutzer mit Login "username" und Passwort "password" erstellt habe
     Dann kriegt der neu erstellte Benutzer bei allen Geräteparks mit aut. Zuweisung die Rolle 'Kunde'
 
   @javascript

@@ -142,3 +142,16 @@ end
 Dann(/^erhalte ich keinen aut\. Zugriff für diesen Gerätepark$/) do
   @user.access_right_for(@current_inventory_pool).should be_nil
 end
+
+Angenommen(/^es ist bei mehreren Geräteparks aut. Zuweisung aktiviert$/) do
+  InventoryPool.all.sample(rand(2..4)).each do |inventory_pool|
+    inventory_pool.update_attributes automatic_access: true
+  end
+  @inventory_pools_with_automatic_access = InventoryPool.where(automatic_access: true)
+  @inventory_pools_with_automatic_access.count.should > 1
+end
+
+Dann(/^kriegt der neu erstellte Benutzer bei allen Geräteparks mit aut. Zuweisung die Rolle 'Kunde'$/) do
+  @user.access_rights.count.should == @inventory_pools_with_automatic_access.count
+  @user.access_rights.pluck(:inventory_pool_id).should == @inventory_pools_with_automatic_access.pluck(:id)
+end
