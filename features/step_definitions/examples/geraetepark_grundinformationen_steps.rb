@@ -133,14 +133,13 @@ end
 
 Dann(/^ist die aut\. Zuweisung deaktiviert$/) do
   @current_inventory_pool.reload.automatic_access.should be_false
+  @ip = @current_inventory_pool
 end
 
 Angenommen(/^man ist ein Benutzer, der sich zum ersten Mal einloggt$/) do
-  @user = FactoryGirl.create :user
-end
-
-Dann(/^erhalte ich keinen aut\. Zugriff für diesen Gerätepark$/) do
-  @user.access_right_for(@current_inventory_pool).should be_nil
+  @username = Faker::Internet.user_name
+  @password = Faker::Internet.password
+  step %Q(ich einen Benutzer mit Login "#{@username}" und Passwort "#{@password}" erstellt habe)
 end
 
 Angenommen(/^es ist bei mehreren Geräteparks aut. Zuweisung aktiviert$/) do
@@ -154,4 +153,8 @@ end
 Dann(/^kriegt der neu erstellte Benutzer bei allen Geräteparks mit aut. Zuweisung die Rolle 'Kunde'$/) do
   @user.access_rights.count.should == @inventory_pools_with_automatic_access.count
   @user.access_rights.pluck(:inventory_pool_id).should == @inventory_pools_with_automatic_access.pluck(:id)
+end
+
+Dann(/^kriegt der neu erstellte Benutzer bei dem vorher editierten Gerätepark kein Zugriffsrecht$/) do
+  @user.access_right_for(@ip).should be_nil
 end
