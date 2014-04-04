@@ -150,9 +150,44 @@ Angenommen(/^es ist bei mehreren Geräteparks aut. Zuweisung aktiviert$/) do
   @inventory_pools_with_automatic_access.count.should > 1
 end
 
+Angenommen(/^es ist bei meinem Gerätepark aut. Zuweisung aktiviert$/) do
+  @current_inventory_pool.update_attributes automatic_access: true
+  @inventory_pools_with_automatic_access = InventoryPool.where(automatic_access: true)
+  @inventory_pools_with_automatic_access.count.should > 1
+end
+
 Dann(/^kriegt der neu erstellte Benutzer bei allen Geräteparks mit aut. Zuweisung die Rolle 'Kunde'$/) do
   @user.access_rights.count.should == @inventory_pools_with_automatic_access.count
   @user.access_rights.pluck(:inventory_pool_id).should == @inventory_pools_with_automatic_access.pluck(:id)
+  @user.access_rights.all? {|ar| ar.role == :customer}.should be_true
+end
+
+Wenn(/^ich in meinem Gerätepark einen neuen Benutzer mit Rolle 'Inventar\-Verwalter' erstelle$/) do
+  steps %Q{
+    Wenn man in der Benutzeransicht ist
+    Und man einen Benutzer hinzufügt
+    Und die folgenden Informationen eingibt
+      | Nachname       |
+      | Vorname        |
+      | E-Mail         |
+    Und man gibt die Login-Daten ein
+    Und man gibt eine Badge-Id ein
+    Und eine der folgenden Rollen auswählt
+      | tab                | role              |
+      | Inventar-Verwalter | inventory_manager   |
+    Und ich speichere
+  }
+  @user = User.find_by_lastname "test"
+end
+
+Dann(/^kriegt der neu erstellte Benutzer bei allen Geräteparks mit aut\. Zuweisung ausser meinem die Rolle 'Kunde'$/) do
+  @user.access_rights.count.should == @inventory_pools_with_automatic_access.count
+  @user.access_rights.pluck(:inventory_pool_id).should == @inventory_pools_with_automatic_access.pluck(:id)
+  @user.access_rights.where("inventory_pool_id != ?", @current_inventory_pool ).all? {|ar| ar.role == :customer}.should be_true
+end
+
+Dann(/^in meinem Gerätepark hat er die Rolle 'Inventar\-Verwalter'$/) do
+  @user.access_right_for(@current_inventory_pool).role.should == :inventory_manager
 end
 
 Dann(/^kriegt der neu erstellte Benutzer bei dem vorher editierten Gerätepark kein Zugriffsrecht$/) do

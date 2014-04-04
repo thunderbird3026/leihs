@@ -47,18 +47,18 @@ Funktionalität: Gerätepark-Grundinformationen
 
   Szenario: Aut. zuweisen beim Benutzererstellen ausserhalb des Geräteparks
     Angenommen Personas existieren
-    Und es ist bei mehreren Geräteparks aut. Zuweisung aktiviert 
     Und ich bin Gino
+    Und es ist bei mehreren Geräteparks aut. Zuweisung aktiviert
     Und man befindet sich auf der Benutzerliste
     Wenn ich einen Benutzer mit Login "username" und Passwort "password" erstellt habe
     Dann kriegt der neu erstellte Benutzer bei allen Geräteparks mit aut. Zuweisung die Rolle 'Kunde'
 
-  @javascript
   Szenario: Aut. zuweisen beim Benutzererstellen innerhalb des Geräteparks
     Angenommen Personas existieren
-    Und es ist bei mehreren und meinem Gerätepark aut. Zuweisung aktiviert 
     Und ich bin Mike
-    Wenn ich in meinem Gerätepark einen neuen Benutzer mit Rolle 'Inventar-Verwalter' erstelle 
+    Und es ist bei mehreren Geräteparks aut. Zuweisung aktiviert
+    Und es ist bei meinem Gerätepark aut. Zuweisung aktiviert
+    Wenn ich in meinem Gerätepark einen neuen Benutzer mit Rolle 'Inventar-Verwalter' erstelle
     Dann kriegt der neu erstellte Benutzer bei allen Geräteparks mit aut. Zuweisung ausser meinem die Rolle 'Kunde'
     Und in meinem Gerätepark hat er die Rolle 'Inventar-Verwalter'
 
